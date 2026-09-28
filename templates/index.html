@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy AI - Personalized Fitness</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+     body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("/static/images/fitbuddy-gym-background.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    color: #172033;
+}
+        /* =================================================
+           HEADER
+        ================================================= */
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #087cff,
+                #1755ad
+            );
+
+            color: white;
+
+            padding: 25px 8%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .logo-area h1 {
+            margin: 0;
+
+            font-size: 30px;
+        }
+
+
+        .logo-area p {
+            margin: 5px 0 0;
+
+            font-size: 15px;
+
+            opacity: 0.9;
+        }
+
+
+        .dashboard-button {
+            text-decoration: none;
+
+            color: white;
+
+            border: 1px solid rgba(255,255,255,0.7);
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .dashboard-button:hover {
+            background: rgb(245, 243, 243);
+
+            color: #1761c4;
+        }
+
+
+        /* =================================================
+           MAIN CONTAINER
+        ================================================= */
+
+        .container {
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        .hero {
+            text-align: center;
+
+            padding: 55px 10px 35px;
+        }
+
+
+        .hero h2 {
+    margin: 0;
+    color: white;
+    font-size: 40px;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+       .hero p {
+    max-width: 750px;
+    margin: 15px auto;
+    color: white;
+    font-size: 17px;
+    line-height: 1.7;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+        /* =================================================
+           FEATURE CARDS
+        ================================================= */
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .feature-card {
+            background: white;
+
+            padding: 28px 25px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(31, 61, 91, 0.10);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(31, 61, 91, 0.15);
+        }
+
+
+        .feature-icon {
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .feature-card h3 {
+            margin: 5px 0 10px;
+
+            font-size: 21px;
+        }
+
+
+        .feature-card p {
+            color: #60708a;
+
+            line-height: 1.6;
+
+            min-height: 75px;
+        }
+
+
+        .feature-button {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 11px 18px;
+
+            background: #1352af;
+
+            color: rgb(252, 248, 248);
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .feature-button:hover {
+            background: #084db2;
+
+            transform: translateY(-1px);
+        }
+
+
+        .nutrition-button {
+            background: #198754;
+        }
+
+
+        .nutrition-button:hover {
+            background: #146c43;
+        }
+
+
+        .feedback-button {
+            background: #6f42c1;
+        }
+
+
+        .feedback-button:hover {
+            background: #59339d;
+        }
+
+
+        /* =================================================
+           MAIN CARD
+        ================================================= */
+
+        .card {
+            background: rgb(238, 237, 237);
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(31, 61, 91, 0.10);
+        }
+
+
+        .card h2 {
+            margin-top: 0;
+
+            font-size: 27px;
+        }
+
+
+        .card-description {
+            color: #66758c;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =================================================
+           FORM
+        ================================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        label {
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #24324a;
+        }
+
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d7deea;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            background: #fbfdff;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(13,110,253,0.10);
+        }
+
+
+        textarea {
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+
+        .generate-button {
+            margin-top: 25px;
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #1755ad
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .generate-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(13,110,253,0.25);
+        }
+
+
+        /* =================================================
+           RESULT
+        ================================================= */
+
+        .result {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #f1f8ff;
+
+            border-left:
+                5px solid #0d6efd;
+
+            border-radius: 10px;
+
+            white-space: pre-wrap;
+
+            line-height: 1.7;
+
+            overflow-x: auto;
+        }
+
+
+        .result-title {
+            color: #0d6efd;
+
+            margin-top: 0;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =================================================
+           NUTRITION RESULT
+        ================================================= */
+
+        .nutrition-result {
+            margin-top: 30px;
+
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0fff7,
+                    #ffffff
+                );
+
+            border-left:
+                5px solid #198754;
+
+            border-radius: 10px;
+
+            white-space: pre-wrap;
+
+            line-height: 1.7;
+        }
+
+
+        .nutrition-result h3 {
+            color: #198754;
+        }
+
+
+        /* =================================================
+           FEEDBACK RESULT
+        ================================================= */
+
+        .feedback-result {
+            margin-top: 30px;
+
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7f1ff,
+                    #ffffff
+                );
+
+            border-left:
+                5px solid #6f42c1;
+
+            border-radius: 10px;
+
+            white-space: pre-wrap;
+
+            line-height: 1.7;
+        }
+
+
+        /* =================================================
+           DIVIDER
+        ================================================= */
+
+        .section-divider {
+            height: 1px;
+
+            background: #e3e8f0;
+
+            margin: 25px 0;
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #68778e;
+
+            font-size: 14px;
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 800px) {
+
+            .header {
+                flex-direction: column;
+
+                gap: 20px;
+
+                text-align: center;
+            }
+
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+
+            .card {
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <h1>💪 FitBuddy AI</h1>
+
+        <p>
+            Your AI-powered personalized fitness assistant
+        </p>
+
+    </div>
+
+
+    <a
+        href="/view-all-users"
+        class="dashboard-button"
+    >
+        Coach Dashboard
+    </a>
+
+</header>
+
+
+
+<main class="container">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <h2>
+        Build Your Personalized Fitness Plan
+    </h2>
+
+    <p>
+        Tell FitBuddy AI about yourself and your fitness
+        goal. The system will create a personalized
+        workout plan designed around your training
+        preferences.
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     THREE MAIN OPTIONS
+===================================================== -->
+
+<section class="features">
+
+
+    <!-- WORKOUT -->
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🏋️
+        </div>
+
+        <h3>
+            Personalized Workouts
+        </h3>
+
+        <p>
+            Generate a personalized workout plan based
+            on your fitness goal, experience level and
+            available training days.
+        </p>
+
+        <a
+            href="#workout-section"
+            class="feature-button"
+        >
+            🏋️ Create Workout
+        </a>
+
+    </div>
+
+
+
+    <!-- NUTRITION -->
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🥗
+        </div>
+
+        <h3>
+            Nutrition Tips
+        </h3>
+
+        <p>
+            Receive useful nutrition and recovery
+            suggestions to support your fitness journey.
+        </p>
+
+        <a
+            href="/nutrition"
+            class="feature-button nutrition-button"
+        >
+            🥗 Get Nutrition Tips
+        </a>
+
+    </div>
+
+
+
+    <!-- FEEDBACK -->
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🔄
+        </div>
+
+        <h3>
+            Feedback & Updates
+        </h3>
+
+        <p>
+            Tell FitBuddy AI what you think about your
+            workout and request an updated plan.
+        </p>
+
+        <a
+            href="#feedback-section"
+            class="feature-button feedback-button"
+        >
+            🔄 Give Feedback
+        </a>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     WORKOUT GENERATOR
+===================================================== -->
+
+<section
+    class="card"
+    id="workout-section"
+>
+
+    <h2>
+        Tell Us About Yourself
+    </h2>
+
+    <p class="card-description">
+
+        Enter your information below to generate your
+        personalized workout plan.
+
+    </p>
+
+
+    <form
+        method="post"
+        action="/generate"
+    >
+
+        <div class="form-grid">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Name
+                </label>
+
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Enter your name"
+                >
+
+            </div>
+
+
+
+            <!-- AGE -->
+
+            <div class="form-group">
+
+                <label for="age">
+                    Age
+                </label>
+
+                <input
+                    id="age"
+                    name="age"
+                    type="number"
+                    min="10"
+                    max="100"
+                    placeholder="Example: 21"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- WEIGHT -->
+
+            <div class="form-group">
+
+                <label for="weight">
+                    Weight (kg)
+                </label>
+
+                <input
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    min="20"
+                    max="300"
+                    step="0.1"
+                    placeholder="Example: 65"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- GOAL -->
+
+            <div class="form-group">
+
+                <label for="goal">
+                    Fitness Goal
+                </label>
+
+                <select
+                    id="goal"
+                    name="goal"
+                    required
+                >
+
+                    <option value="">
+                        Select your goal
+                    </option>
+
+                    <option value="weight loss">
+                        Weight Loss
+                    </option>
+
+                    <option value="muscle gain">
+                        Muscle Gain
+                    </option>
+
+                    <option value="improve stamina">
+                        Improve Stamina
+                    </option>
+
+                    <option value="general wellness">
+                        General Wellness
+                    </option>
+
+                    <option value="strength">
+                        Build Strength
+                    </option>
+
+                    <option value="flexibility">
+                        Improve Flexibility
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- FITNESS LEVEL -->
+
+            <div class="form-group">
+
+                <label for="fitness_level">
+                    Fitness Level
+                </label>
+
+                <select
+                    id="fitness_level"
+                    name="fitness_level"
+                    required
+                >
+
+                    <option value="">
+                        Select fitness level
+                    </option>
+
+                    <option value="beginner">
+                        Beginner
+                    </option>
+
+                    <option value="intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- DAYS -->
+
+            <div class="form-group">
+
+                <label for="days_per_week">
+                    Training Days Per Week
+                </label>
+
+                <select
+                    id="days_per_week"
+                    name="days_per_week"
+                    required
+                >
+
+                    <option value="1">
+                        1 Day
+                    </option>
+
+                    <option value="2">
+                        2 Days
+                    </option>
+
+                    <option
+                        value="3"
+                        selected
+                    >
+                        3 Days
+                    </option>
+
+                    <option value="4">
+                        4 Days
+                    </option>
+
+                    <option value="5">
+                        5 Days
+                    </option>
+
+                    <option value="6">
+                        6 Days
+                    </option>
+
+                    <option value="7">
+                        7 Days
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- INTENSITY -->
+
+            <div class="form-group full">
+
+                <label for="intensity">
+                    Workout Intensity
+                </label>
+
+                <select
+                    id="intensity"
+                    name="intensity"
+                    required
+                >
+
+                    <option value="light">
+                        Light
+                    </option>
+
+                    <option
+                        value="moderate"
+                        selected
+                    >
+                        Moderate
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="generate-button"
+        >
+            🚀 Generate My Personalized Workout
+        </button>
+
+
+    </form>
+
+
+
+    <!-- WORKOUT RESULT -->
+
+    {% if result %}
+
+    <div class="result">
+
+        <h3 class="result-title">
+            🏋️ Your Personalized Workout Plan
+        </h3>
+
+        {{ result }}
+
+    </div>
+
+    {% endif %}
+
+
+</section>
+
+
+
+<!-- =====================================================
+     NUTRITION RESULT
+===================================================== -->
+
+{% if nutrition %}
+
+<section class="card">
+
+    <h2>
+        🥗 Nutrition & Recovery
+    </h2>
+
+    <div class="nutrition-result">
+
+        {{ nutrition }}
+
+    </div>
+
+    <div style="margin-top: 20px;">
+
+        <a
+            href="#workout-section"
+            class="feature-button"
+        >
+            ← Back to Workout
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+
+<!-- =====================================================
+     FEEDBACK SECTION
+===================================================== -->
+
+<section
+    class="card"
+    id="feedback-section"
+>
+
+    <h2>
+        🔄 Feedback & Workout Updates
+    </h2>
+
+    <p class="card-description">
+
+        Tell FitBuddy AI how your workout went.
+        Your feedback will be used to create an updated
+        workout plan.
+
+    </p>
+
+
+    <form
+        method="post"
+        action="/feedback"
+    >
+
+
+        <!-- FEEDBACK -->
+
+        <div class="form-group">
+
+            <label for="feedback_text">
+                Your Feedback
+            </label>
+
+            <textarea
+                id="feedback_text"
+                name="feedback_text"
+                placeholder="Example: The workout was too difficult. I would like a lighter workout with more walking."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <!-- GOAL -->
+
+            <div class="form-group">
+
+                <label for="feedback_goal">
+                    Fitness Goal
+                </label>
+
+                <select
+                    id="feedback_goal"
+                    name="goal"
+                >
+
+                    <option value="general wellness">
+                        General Wellness
+                    </option>
+
+                    <option value="weight loss">
+                        Weight Loss
+                    </option>
+
+                    <option value="muscle gain">
+                        Muscle Gain
+                    </option>
+
+                    <option value="improve stamina">
+                        Improve Stamina
+                    </option>
+
+                    <option value="strength">
+                        Build Strength
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- FITNESS LEVEL -->
+
+            <div class="form-group">
+
+                <label for="feedback_level">
+                    Fitness Level
+                </label>
+
+                <select
+                    id="feedback_level"
+                    name="fitness_level"
+                >
+
+                    <option value="beginner">
+                        Beginner
+                    </option>
+
+                    <option value="intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DAYS -->
+
+            <div class="form-group full">
+
+                <label for="feedback_days">
+                    Training Days Per Week
+                </label>
+
+                <select
+                    id="feedback_days"
+                    name="days_per_week"
+                >
+
+                    <option value="1">
+                        1 Day
+                    </option>
+
+                    <option value="2">
+                        2 Days
+                    </option>
+
+                    <option
+                        value="3"
+                        selected
+                    >
+                        3 Days
+                    </option>
+
+                    <option value="4">
+                        4 Days
+                    </option>
+
+                    <option value="5">
+                        5 Days
+                    </option>
+
+                    <option value="6">
+                        6 Days
+                    </option>
+
+                    <option value="7">
+                        7 Days
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="generate-button"
+            style="background: linear-gradient(135deg, #6f42c1, #4d2b8c);"
+        >
+            🔄 Update My Workout Plan
+        </button>
+
+
+    </form>
+
+
+
+    <!-- FEEDBACK RESULT -->
+
+    {% if feedback_result %}
+
+    <div class="feedback-result">
+
+        {{ feedback_result }}
+
+    </div>
+
+    {% endif %}
+
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        💪 FitBuddy AI
+    </p>
+
+    <p>
+        AI-powered personalized fitness assistant
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
